@@ -1,0 +1,78 @@
+1.Create a table EMPLOYEE have the following fields (emp_id, name,city,dob,adhar_no)?
+
+
+mysql> create table EMPLOYEE(emp_id int,name varchar(20),city char,dob int,adhar_no int);
+Query OK, 0 rows affected (0.72 sec)
+
+mysql> show tables;
++----------------------+
+| Tables_in_rabeeha_py |
++----------------------+
+| EMPLOYEE             |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> desc EMPLOYEE;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| emp_id   | int         | YES  |     | NULL    |       |
+| name     | varchar(20) | YES  |     | NULL    |       |
+| city     | char(1)     | YES  |     | NULL    |       |
+| dob      | int         | YES  |     | NULL    |       |
+| adhar_no | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+
+2.Create a table STUDENT have the fields(roll_no, name, age, address, gender)and add following constraints on it.
+
+  Roll_no – Primary key
+
+  Name – does not allow null values
+
+  Age- must be in between (0-99), does not allow null values
+
+  Gender- default value is ‘m’
+  
+mysql> create table student(roll_no int primary key,name varchar(20) not null,age int not null check(age between 0 and 9),address  char,gender char def
+ault"m");
+Query OK, 0 rows affected (1.51 sec)
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| roll_no | int         | NO   | PRI | NULL    |       |
+| name    | varchar(20) | NO   |     | NULL    |       |
+| age     | int         | NO   |     | NULL    |       |
+| address | char(1)     | YES  |     | NULL    |       |
+| gender  | char(1)     | YES  |     | m       |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+3.Create a temporary table STUDENT1 of STUDENT relation.
+
+mysql> create temporary table student1 as select * from student;
+Query OK, 0 rows affected (0.00 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+4.Create a duplicate table of EMPLOYEE.
+
+mysql> create table empoyee_duplicate as select * from EMPLOYEE;
+Query OK, 0 rows affected (1.27 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++-------------+--------+------+-----+---------+-------+
+| Field       | Type   | Null | Key | Default | Extra |
++-------------+--------+------+-----+---------+-------+
+| employee_id | int    | YES  |     | NULL    |       |
+| roll_no     | int    | YES  |     | NULL    |       |
+| age         | int    | YES  |     | NULL    |       |
+| hight       | float  | YES  |     | NULL    |       |
+| wight       | double | YES  |     | NULL    |       |
++-------------+--------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+
