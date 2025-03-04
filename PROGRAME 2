@@ -16,34 +16,33 @@ Value insertion................
 -> some customers purchase more than 2 products
 
 
-mysql> insert into customer2 (cust_id,name,address,city,ph_no) values (100001,'A','athani','calicut',356984711);
-Query OK, 1 row affected (0.12 sec)
+  mysql> insert into customer2 (cust_id,name,address,city,ph_no) values (100001,'A','athani','calicut',356984711);
+  Query OK, 1 row affected (0.12 sec)
 
-mysql> insert into customer2 (cust_id,name,address,city,ph_no) values (100002,'B','atholi','eranakulam',25846972);
-Query OK, 1 row affected (0.11 sec)
+  mysql> insert into customer2 (cust_id,name,address,city,ph_no) values (100002,'B','atholi','eranakulam',25846972);
+  Query OK, 1 row affected (0.11 sec)
 
-mysql> insert into customer2 (cust_id,name,address,city,ph_no) values (100003,'C','annassery','malappuram',578785356);
-Query OK, 1 row affected (0.10 sec)
+    mysql> insert into customer2 (cust_id,name,address,city,ph_no) values (100003,'C','annassery','malappuram',578785356);
+   Query OK, 1 row affected (0.10 sec)
 
-mysql> insert into customer2 (cust_id,name,address,city,ph_no) values (100004,'D','chunkam','trissur');
-ERROR 1136 (21S01): Column count doesn't match value count at row 1
-mysql> insert into customer2 (cust_id,name,address,city) values (100004,'D','chunkam','trissur');
-Query OK, 1 row affected (0.10 sec)
 
-mysql> insert into customer2 (cust_id,name,address,city) values (100005,'D','keloth','palakkad');
-Query OK, 1 row affected (0.09 sec)
+   mysql> insert into customer2 (cust_id,name,address,city) values   (100004,'D','chunkam','trissur');
+   Query OK, 1 row affected (0.10 sec)
 
-mysql> select * from customer2;
-+---------+------+-----------+------------+-----------+
-| cust_id | name | address   | city       | ph_no     |
-+---------+------+-----------+------------+-----------+
-|  100001 | A    | athani    | calicut    | 356984711 |
-|  100002 | B    | atholi    | eranakulam |  25846972 |
-|  100003 | C    | annassery | malappuram | 578785356 |
-|  100004 | D    | chunkam   | trissur    |      NULL |
-|  100005 | D    | keloth    | palakkad   |      NULL |
-+---------+------+-----------+------------+-----------+
-5 rows in set (0.00 sec)
+   mysql> insert into customer2 (cust_id,name,address,city) values  (100005,'D','keloth','palakkad');
+   Query OK, 1 row affected (0.09 sec)
+
+   mysql> select * from customer2;
+   +---------+------+-----------+------------+-----------+
+   | cust_id | name | address   | city       | ph_no     |
+   +---------+------+-----------+------------+-----------+
+   |  100001 | A    | athani    | calicut    | 356984711 |
+   |  100002 | B    | atholi    | eranakulam |  25846972 |
+   |  100003 | C    | annassery | malappuram | 578785356 |
+   |  100004 | D    | chunkam   | trissur    |      NULL |
+   |  100005 | D    | keloth    | palakkad   |      NULL |
+   +---------+------+-----------+------------+-----------+
+   5 rows in set (0.00 sec)
 
 
 mysql> insert into product2 values (1,'pen',50);
@@ -73,32 +72,32 @@ mysql> select * from product2;
 +------+--------+-------+
 5 rows in set (0.00 sec)
 
-mysql> INSERT INTO invoic_master1 VALUES (101, 100001, '2023-1-1');
-Query OK, 1 row affected (0.11 sec)
+   mysql> INSERT INTO invoic_master1 VALUES (101, 100001, '2023-1-1');
+   Query OK, 1 row affected (0.11 sec)
 
-mysql> INSERT INTO invoic_master1 VALUES (102, 100002, '2023-2-12');
-Query OK, 1 row affected (0.14 sec)
+   mysql> INSERT INTO invoic_master1 VALUES (102, 100002, '2023-2-12');
+   Query OK, 1 row affected (0.14 sec)
 
-mysql> INSERT INTO invoic_master1 VALUES (103, 100003, '2023-5-21');
-Query OK, 1 row affected (0.13 sec)
+   mysql> INSERT INTO invoic_master1 VALUES (103, 100003, '2023-5-21');
+   Query OK, 1 row affected (0.13 sec)
 
-mysql> INSERT INTO invoic_master1 VALUES (104, 100004, '2023-7-26');
-Query OK, 1 row affected (0.12 sec)
+   mysql> INSERT INTO invoic_master1 VALUES (104, 100004, '2023-7-26');
+   Query OK, 1 row affected (0.12 sec)
 
-mysql> INSERT INTO invoic_master1 VALUES (105, 100005, '2024-7-10');
-Query OK, 1 row affected (0.10 sec)
+   mysql> INSERT INTO invoic_master1 VALUES (105, 100005, '2024-7-10');
+   Query OK, 1 row affected (0.10 sec)
 
-mysql> select *from invoic_master1;
-+--------+---------+------------+
-| inv_id | cust_id | inv_date   |
-+--------+---------+------------+
-|    101 |  100001 | 2023-01-01 |
-|    102 |  100002 | 2023-02-12 |
-|    103 |  100003 | 2023-05-21 |
-|    104 |  100004 | 2023-07-26 |
-|    105 |  100005 | 2024-07-10 |
-+--------+---------+------------+
-5 rows in set (0.00 sec)
+   mysql> select *from invoic_master1;
+   +--------+---------+------------+
+   | inv_id | cust_id | inv_date   |
+   +--------+---------+------------+
+   |    101 |  100001 | 2023-01-01 |
+   |    102 |  100002 | 2023-02-12 |
+   |    103 |  100003 | 2023-05-21 |
+   |    104 |  100004 | 2023-07-26 |
+   |    105 |  100005 | 2024-07-10 |
+   +--------+---------+------------+
+   5 rows in set (0.00 sec)
 
 mysql> INSERT INTO invoic_item1 VALUES (101,1,1);
 Query OK, 1 row affected (0.10 sec)
@@ -132,173 +131,195 @@ b) DML - UPDATE
 
  1. Update the price of a particular product. 
  
-mysql> update product2 set price=100 where p_id=1;
-Query OK, 1 row affected (0.18 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
+   mysql> update product2 set price=100 where p_id=1;
+   Query OK, 1 row affected (0.18 sec)
+   Rows matched: 1  Changed: 1  Warnings: 0
 
-mysql> select * from product2;
-+------+--------+-------+
-| p_id | name   | price |
-+------+--------+-------+
-|    1 | pen    |   100 |
-|    2 | pencil |    70 |
-|    3 | soap   |    60 |
-|    4 | sketch |    80 |
-|    5 | book   |   140 |
-+------+--------+-------+
-5 rows in set (0.00 sec)
+   mysql> select * from product2;
+   +------+--------+-------+
+   | p_id | name   | price |
+   +------+--------+-------+
+   |    1 | pen    |   100 |
+   |    2 | pencil |    70 |
+   |    3 | soap   |    60 |
+   |    4 | sketch |    80 |
+   |    5 | book   |   140 |
+   +------+--------+-------+
+   5 rows in set (0.00 sec)
 
 
 2. Change the name of city ‘calicut’ to ‘kozhikode’ in the customer table. 
 
-mysql> update customer2 set city = 'kozhikode' where city='calicut';
-Query OK, 1 row affected (0.09 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
+   mysql> update customer2 set city = 'kozhikode' where city='calicut';
+   Query OK, 1 row affected (0.09 sec)
+   Rows matched: 1  Changed: 1  Warnings: 0
 
-mysql> select * from customer2;
-+---------+------+-----------+------------+-----------+
-| cust_id | name | address   | city       | ph_no     |
-+---------+------+-----------+------------+-----------+
-|  100001 | A    | athani    | kozhikode  | 356984711 |
-|  100002 | B    | atholi    | eranakulam |  25846972 |
-|  100003 | C    | annassery | malappuram | 578785356 |
-|  100004 | D    | chunkam   | trissur    |      NULL |
-|  100005 | D    | keloth    | palakkad   |      NULL |
-+---------+------+-----------+------------+-----------+
-5 rows in set (0.00 sec)
+   mysql> select * from customer2;
+   +---------+------+-----------+------------+-----------+
+   | cust_id | name | address   | city       | ph_no     |
+   +---------+------+-----------+------------+-----------+
+   |  100001 | A    | athani    | kozhikode  | 356984711 |
+   |  100002 | B    | atholi    | eranakulam |  25846972 |
+   |  100003 | C    | annassery | malappuram | 578785356 |
+   |  100004 | D    | chunkam   | trissur    |      NULL |
+   |  100005 | D    | keloth    | palakkad   |      NULL |
+   +---------+------+-----------+------------+-----------+
+   5 rows in set (0.00 sec)
 
 3. Update all prices with 2% of its original price. 
 
-mysql> update product2 set price=price + (price*.02);
-Query OK, 5 rows affected (0.11 sec)
-Rows matched: 5  Changed: 5  Warnings: 0
+    mysql> update product2 set price=price*1.02;
+    Query OK, 5 rows affected (0.11 sec)
+    Rows matched: 5  Changed: 5  Warnings: 0
 
-mysql> select * from product2;
-+------+--------+-------+
-| p_id | name   | price |
-+------+--------+-------+
-|    1 | pen    |   102 |
-|    2 | pencil |  71.4 |
-|    3 | soap   |  61.2 |
-|    4 | sketch |  81.6 |
-|    5 | book   | 142.8 |
-+------+--------+-------+
-5 rows in set (0.00 sec)
+    mysql> select * from product2;
+    +------+--------+-------+
+    | p_id | name   | price |
+    +------+--------+-------+
+    |    1 | pen    |    51 |
+    |    2 | pencil |    71 |
+    |    3 | soap   |    61 |
+    |    4 | sketch |    82 |
+    |    5 | book   |   143 |
+    +------+--------+-------+
+    5 rows in set (0.00 sec)
 
 
 4.Change the address, city, phone number of a particular customer. 
 
-mysql> update customer2 set  address='athanikkal',city='kannur',ph_no='645842121'
-where cust_id=100002;
-Query OK, 1 row affected (0.11 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
+  mysql> update customer2 set              address='athanikkal',city='kannur',ph_no='645842121'
+  where cust_id=100002;
+  Query OK, 1 row affected (0.11 sec)
+  Rows matched: 1  Changed: 1  Warnings: 0
 
-mysql> select * from customer2;
-+---------+------+------------+------------+-----------+
-| cust_id | name | address    | city       | ph_no     |
-+---------+------+------------+------------+-----------+
-|  100001 | A    | athani     | kozhikode  | 356984711 |
-|  100002 | B    | athanikkal | kannur     | 645842121 |
-|  100003 | C    | annassery  | malappuram | 578785356 |
-|  100004 | D    | chunkam    | trissur    |      NULL |
-|  100005 | D    | keloth     | palakkad   |      NULL |
-+---------+------+------------+------------+-----------+
-5 rows in set (0.01 sec)
+   mysql> select * from customer2;
+   +---------+------+------------+------------+-----------+
+   | cust_id | name | address    | city       | ph_no     |
+   +---------+------+------------+------------+-----------+
+   |  100001 | A    | athani     | kozhikode  | 356984711 |
+   |  100002 | B    | athanikkal | kannur     | 645842121 |
+   |  100003 | C    | annassery  | malappuram | 578785356 |
+   |  100004 | D    | chunkam    | trissur    |      NULL |
+   |  100005 | D    | keloth     | palakkad   |      NULL |
+   +---------+------+------------+------------+-----------+
+   5 rows in set (0.01 sec)
 
 5.Change the quantity of a purchased product of inv_id ‘101’
 
-update invoic_item1 set quantity=3 where quantity=2;
-Query OK, 1 row affected (0.10 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
+  update invoic_item1 set quantity=3 where quantity=2;
+  Query OK, 1 row affected (0.10 sec)
+  Rows matched: 1  Changed: 1  Warnings: 0
 
-mysql> select * from invoic_item1;
-+--------+------+----------+
-| inv_id | p_id | quantity |
-+--------+------+----------+
-|    101 |    1 |        3 |
-|    102 |    3 |        4 |
-|    105 |    5 |        7 |
-|    103 |    3 |        7 |
-+--------+------+----------+
+   mysql> select * from invoic_item1;
+   +--------+------+----------+
+   | inv_id | p_id | quantity |
+   +--------+------+----------+
+   |    101 |    1 |        3 |
+   |    102 |    3 |        4 |
+   |    105 |    5 |        7 |
+   |    103 |    3 |        7 |
+   +--------+------+----------+
 4 rows in set (0.00 sec)
 
 
 c) DML - DELETE 
 
+
 1.Delete the record of customer id ‘10001’.
 
-mysql> delete from invoic_item1 where inv_id=101;
-Query OK, 0 rows affected (0.00 sec)
+   mysql> delete from invoic_item1 where inv_id=101;
+   Query OK, 0 rows affected (0.00 sec)
 
-mysql> delete from invoic_master1 where cust_id=100001;
-Query OK, 0 rows affected (0.00 sec)
+   mysql> delete from invoic_master1 where cust_id=100001;
+   Query OK, 0 rows affected (0.00 sec)
 
-mysql> delete from customer2 where cust_id=100001;
-Query OK, 0 rows affected (0.00 sec)
+   mysql> delete from customer2 where cust_id=100001;
+   Query OK, 0 rows affected (0.00 sec)
 
-mysql> select * from customer2;
-+---------+------+------------+------------+-----------+
-| cust_id | name | address    | city       | ph_no     |
-+---------+------+------------+------------+-----------+
-|  100002 | B    | athanikkal | kannur     | 645842121 |
-|  100003 | C    | annassery  | malappuram | 578785356 |
-|  100004 | D    | chunkam    | trissur    |      NULL |
-|  100005 | D    | keloth     | palakkad   |      NULL |
-+---------+------+------------+------------+-----------+
-4 rows in set (0.00 sec)
+   mysql> select * from customer2;
+   +---------+------+------------+------------+-----------+
+   | cust_id | name | address    | city       | ph_no     |
+   +---------+------+------------+------------+-----------+
+   |  100002 | B    | athanikkal | kannur     | 645842121 |
+   |  100003 | C    | annassery  | malappuram | 578785356 |
+   |  100004 | D    | chunkam    | trissur    |      NULL |
+   |  100005 | D    | keloth     | palakkad   |      NULL |
+   +---------+------+------------+------------+-----------+
+   4 rows in set (0.00 sec)
 
 
 
 2. Delete all purchase details of items its quantity less than 2. 
 
-mysql> DELETE FROM invoic_item1 WHERE quantity < 2;
-Query OK, 0 rows affected (0.00 sec)
+   mysql> DELETE FROM invoic_item1 WHERE quantity < 2;
+   Query OK, 0 rows affected (0.00 sec)
 
-mysql> select * from invoic_item1;
-+--------+------+----------+
-| inv_id | p_id | quantity |
-+--------+------+----------+
-|    101 |    1 |        2 |
-|    102 |    3 |        4 |
-|    105 |    5 |        7 |
-|    103 |    3 |        7 |
-+--------+------+----------+
-4 rows in set (0.00 sec)
+   mysql> select * from invoic_item1;
+   +--------+------+----------+
+   | inv_id | p_id | quantity |
+   +--------+------+----------+
+   |    101 |    1 |        2 |
+   |    102 |    3 |        4 |
+   |    105 |    5 |        7 |
+   |    103 |    3 |        7 |
+   +--------+------+----------+
+   4 rows in set (0.00 sec)
 
 3.Delete the purchase details of product ‘pen’ in the in_id ‘101’.
 
-mysql> DELETE FROM invoic_item1 WHERE p_id = 1 AND inv_id = 101;
-Query OK, 1 row affected (0.10 sec)
+   mysql> DELETE FROM invoic_item1 WHERE p_id = 1 AND inv_id = 101;
+   Query OK, 1 row affected (0.10 sec)
+
+   mysql> select * from invoic_item1;
+   +--------+------+----------+
+   | inv_id | p_id | quantity |
+   +--------+------+----------+
+   |    102 |    3 |        4 |
+   |    105 |    5 |        7 |
+   |    103 |    3 |        7 |
+   +--------+------+----------+
+   3 rows in set (0.00 sec)
+
+4. Delete details of employees who does not have phone number. 
+
+   mysql> DELETE FROM customer2 WHERE ph_no is NULL;
+   Query OK, 2 rows affected (0.18 sec)
+
+   mysql> select * from customer2;
+   +---------+------+------------+------------+-----------+
+   | cust_id | name | address    | city       | ph_no     |
+   +---------+------+------------+------------+-----------+
+   |  100002 | B    | athanikkal | kannur     | 645842121 |
+   |  100003 | C    | annassery  | malappuram | 578785356 |
+   +---------+------+------------+------------+-----------+
+   2 rows in set (0.00 sec)
+
+5.Delete Invoice details of a particular customer(name) 
+
+   mysql> delete from customer2 WHERE name='B';
+   Query OK, 1 row affected (0.10 sec)
+
+   mysql> select * from customer2;
+   +---------+------+-----------+------------+-----------+
+   | cust_id | name | address   | city       | ph_no     |
+   +---------+------+-----------+------------+-----------+
+   |  100003 | C    | annassery | malappuram | 578785356 |
+   +---------+------+-----------+------------+-----------+
+   1 row in set (0.00 sec)
+
+
+
+6.Delete the first two records of INVOICE_ITEM table its purchase quantity.
+
+mysql> delete from invoic_item1 quantity limit 2;
+Query OK, 2 rows affected (0.16 sec)
 
 mysql> select * from invoic_item1;
 +--------+------+----------+
 | inv_id | p_id | quantity |
 +--------+------+----------+
-|    102 |    3 |        4 |
-|    105 |    5 |        7 |
 |    103 |    3 |        7 |
 +--------+------+----------+
-3 rows in set (0.00 sec)
+1 row in set (0.00 sec)
 
-4. Delete details of employees who does not have phone number. 
-
-mysql> DELETE FROM customer2 WHERE ph_no is NULL;
-Query OK, 2 rows affected (0.18 sec)
-
-mysql> select * from customer2;
-+---------+------+------------+------------+-----------+
-| cust_id | name | address    | city       | ph_no     |
-+---------+------+------------+------------+-----------+
-|  100002 | B    | athanikkal | kannur     | 645842121 |
-|  100003 | C    | annassery  | malappuram | 578785356 |
-+---------+------+------------+------------+-----------+
-2 rows in set (0.00 sec)
-
-5.Delete Invoice details of a particular customer(name) 
-
-
-
-
-
-6.Delete the first two records of INVOICE_ITEM table its purchase quanti
 
