@@ -276,3 +276,4 @@ mysql> desc student;
 ERROR 1146 (42S02): Table 'rabeeha_py.student' doesn't exist
 mysql> 
 
+//VERIFIED
