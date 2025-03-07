@@ -282,6 +282,15 @@ c) DML - DELETE
 
 4. Delete details of employees who does not have phone number. 
 
+   mysql> delete from invoice_master where cust_id=10004;
+   Query OK, 1 row affected (1.77 sec)
+
+   mysql> delete from invoice_item where inv_id=105;
+   Query OK, 1 row affected (0.26 sec)
+
+   mysql> delete from invoice_master where cust_id=10005;
+   Query OK, 1 row affected (0.31 sec)
+
    mysql> DELETE FROM customer2 WHERE ph_no is NULL;
    Query OK, 2 rows affected (0.18 sec)
 
