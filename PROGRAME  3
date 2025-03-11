@@ -1,0 +1,235 @@
+A)TCL COMMANDS
+ 
+ 1. COMMIT
+   
+   mysql> select * from students;
+   +---------+------+------+
+   | rool_no | name | age  |
+   +---------+------+------+
+   |       2 | B    |   12 |
+   +---------+------+------+
+   3 rows in set (0.00 sec)
+
+   mysql> insert into students values(4,'D',20);
+   Query OK, 1 row affected (0.00 sec)
+
+   mysql> select * from students;
+   +---------+------+------+
+   | rool_no | name | age  |
+   +---------+------+------+
+   |       2 | B    |   12 |
+   |       4 | D    |   20 |
+   +---------+------+------+
+   4 rows in set (0.01 sec)
+
+delete after terminal
+
+  mysql> select * from students;
+  +---------+------+------+
+  | rool_no | name | age  |
+  +---------+------+------+
+  |       2 | B    |   12 |
+  +---------+------+------+
+  1 row in set (0.00 sec)
+
+
+  mysql> insert into students values(4,'D',20);
+  Query OK, 1 row affected (0.10 sec)
+
+  mysql> commit;
+  Query OK, 0 rows affected (0.00 sec)
+
+  mysql> select * from students;
+  +---------+------+------+
+  | rool_no | name | age  |
+  +---------+------+------+
+  |       2 | B    |   12 |
+  |       4 | D    |   20 |
+  +---------+------+------+
+  2 rows in set (0.00 sec)
+
+
+
+
+3. ROLLBACK
+ 
+  mysql> select * from students;
+  +---------+------+------+
+  | rool_no | name | age  |
+  +---------+------+------+
+  |       1 | A    |   10 |
+  |       2 | B    |   12 |
+  +---------+------+------+
+  2 rows in set (0.00 sec)
+
+  mysql> set autocommit=off;
+  Query OK, 0 rows affected (0.00 sec)
+
+  mysql> delete from students where rool_no=2;
+  Query OK, 1 row affected (0.00 sec)
+
+  mysql> select * from students;
+  +---------+------+------+
+  | rool_no | name | age  |
+  +---------+------+------+
+  |       1 | A    |   10 |
+  +---------+------+------+
+  1 row in set (0.00 sec)
+
+  mysql> rollback;
+  Query OK, 0 rows affected (0.04 sec)
+
+  mysql> select * from students;
+  +---------+------+------+
+  | rool_no | name | age  |
+  +---------+------+------+
+  |       1 | A    |   10 |
+  |       2 | B    |   12 |
+  +---------+------+------+
+  2 rows in set (0.00 sec)
+
+  mysql> delete from students where rool_no=1;
+  Query OK, 1 row affected (0.00 sec)
+
+  mysql> select * from students;
+  +---------+------+------+
+  | rool_no | name | age  |
+  +---------+------+------+
+  |       2 | B    |   12 |
+  +---------+------+------+
+  1 row in set (0.00 sec)
+
+  mysql> commit;
+  Query OK, 0 rows affected (0.09 sec)
+
+  mysql> select * from students;
+  +---------+------+------+
+  | rool_no | name | age  |
+  +---------+------+------+
+  |       2 | B    |   12 |
+  +---------+------+------+
+  1 row in set (0.00 sec)
+
+   mysql> rollback;
+   Query OK, 0 rows affected (0.00 sec)
+
+   mysql> select * from students;
+   +---------+------+------+
+   | rool_no | name | age  |
+   +---------+------+------+
+   |       2 | B    |   12 |
+   +---------+------+------+
+   1 row in set (0.01 sec)
+
+3. SAVEPOINT
+
+  mysql> set autocommit=off;
+  Query OK, 0 rows affected (0.00 sec)
+
+  mysql> select * from students;
+  +---------+------+------+
+  | rool_no | name | age  |
+  +---------+------+------+
+  |       2 | B    |   12 |
+  +---------+------+------+
+  1 row in set (0.00 sec)
+
+  mysql> insert into students values(1,'A',10);
+  Query OK, 1 row affected (0.00 sec)
+
+  mysql> savepoint s1;
+  Query OK, 0 rows affected (0.00 sec)
+
+  mysql> insert into students values(3,'C',15);
+  Query OK, 1 row affected (0.00 sec)
+
+  mysql> savepoint s2;
+  Query OK, 0 rows affected (0.00 sec)
+
+  mysql> insert into students values(4,'D',20);
+  Query OK, 1 row affected (0.00 sec)
+
+  mysql> savepoint s3;
+  Query OK, 0 rows affected (0.00 sec)
+
+  mysql> select * from students;
+  +---------+------+------+
+  | rool_no | name | age  |
+  +---------+------+------+
+  |       1 | A    |   10 |
+  |       2 | B    |   12 |
+  |       3 | C    |   15 |
+  |       4 | D    |   20 |
+  +---------+------+------+
+  4 rows in set (0.00 sec)
+
+  mysql> rollback to s2;
+  Query OK, 0 rows affected (0.00 sec)
+
+  mysql> select * from students;
+  +---------+------+------+
+  | rool_no | name | age  |
+  +---------+------+------+
+  |       1 | A    |   10 |
+  |       2 | B    |   12 |
+  |       3 | C    |   15 |
+  +---------+------+------+
+  3 rows in set (0.00 sec)
+
+B)DCL COMMANDS
+ 
+ 1. GRANT
+ 
+ Give insert and select privilege to user 1 on customer table in the invoice database.
+ 
+   mysql> create user abc1@'localhost' IDENTIFIED BY 'ASD@asd32';
+   Query OK, 0 rows affected (0.10 sec)
+
+   mysql> grant insert,select on INVOICE.customer2 to 'abc1'@'localhost';
+   Query OK, 0 rows affected (0.12 sec)
+
+   mysql> show grants for 'abc1'@'localhost';
+   +---------------------------------------------------------------------+
+   | Grants for abc1@localhost                                           |
+   +---------------------------------------------------------------------+
+   | GRANT USAGE ON *.* TO `abc1`@`localhost`                            |
+   | GRANT SELECT, INSERT ON `INVOICE`.`customer2` TO `abc1`@`localhost` |
+   +---------------------------------------------------------------------+
+   2 rows in set (0.00 sec)
+
+
+Give update and delete privilege to user 2 on all tables in the invoice database.
+
+   mysql> create  user abc2@'localhost' IDENTIFIED BY 'ASD@asd123';
+   Query OK, 0 rows affected (0.15 sec)
+
+   mysql> grant update,delete on INVOICE.* TO 'abc2'@'localhost';
+   Query OK, 0 rows affected (0.10 sec)
+
+   mysql> show grants for 'abc1'@'localhost';
+   +---------------------------------------------------------------------+
+   | Grants for abc1@localhost                                           |
+   +---------------------------------------------------------------------+
+   | GRANT USAGE ON *.* TO `abc1`@`localhost`                            |
+   | GRANT SELECT, INSERT ON `INVOICE`.`customer2` TO `abc1`@`localhost` |
+   +---------------------------------------------------------------------+
+   2 rows in set (0.00 sec)
+
+
+
+2. REVOKE
+
+Remove delete privilege of user 2.
+
+   mysql> revoke delete on INVOICE.* FROM 'abc2'@'localhost';
+   Query OK, 0 rows affected (0.11 sec)
+
+   mysql> show grants for 'abc2'@'localhost';
+   +---------------------------------------------------+
+   | Grants for abc2@localhost                         |
+   +---------------------------------------------------+
+   | GRANT USAGE ON *.* TO `abc2`@`localhost`          |
+   | GRANT UPDATE ON `INVOICE`.* TO `abc2`@`localhost` |
+   +---------------------------------------------------+
+   2 rows in set (0.00 sec)
+
