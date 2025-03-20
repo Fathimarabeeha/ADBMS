@@ -1,0 +1,77 @@
+ACCESSING DATABASES
+
+1. Create a view for customers who have purchased products.
+
+mysql> SELECT*FROM customer0;
++---------+---------+-----------+------------+-----------+
+| cust_id | name    | address   | city       | ph_no     |
++---------+---------+-----------+------------+-----------+
+|   10001 | arbit   | atholi    | tvm        | 546546511 |
+|   10002 | Rifa    | atholi    | ekm        | 546546511 |
+|   10004 | Rifa    | atholi    | ekm        |      NULL |
+|   10006 | earson  | athani    | ekm        | 875454488 |
+|   10007 | fathima | athani    | ekm        | 875454488 |
+|  100003 | C       | annassery | malappuram | 578785356 |
++---------+---------+-----------+------------+-----------+
+6 rows in set (0.02 sec)
+
+mysql> select * from invoice_master0;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|    101 |    NULL | 2023-01-01 |
+|    102 |    NULL | 2023-02-12 |
+|    103 |  100003 | 2023-05-21 |
+|    104 |    NULL | 2023-07-26 |
++--------+---------+------------+
+4 rows in set (0.00 sec)
+
+       mysql> create view ss as  select * from customer0 where cust_id in(select cust_id from invoice_master0 where inv_id in (select inv_id from invoice_item0));
+       Query OK, 0 rows affected (0.18 sec)
+
+       mysql> select *from ss;
+       +---------+------+-----------+------------+-----------+
+       | cust_id | name | address   | city       | ph_no     |
+       +---------+------+-----------+------------+-----------+
+      |  100003 | C    | annassery | malappuram | 578785356 |
+      +---------+------+-----------+------------+-----------+
+      1 row in set (0.01 sec)
+
+2. Create a view for no sale products.
+
+mysql> SELeCT * FROM invoice_item0;
++--------+------+----------+
+| inv_id | p_id | quantity |
++--------+------+----------+
+|    103 |    3 |        7 |
+|    101 |    1 |        7 |
+|    102 |    1 |        3 |
+|    102 |    1 |        3 |
+|    103 |    3 |        7 |
++--------+------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select * FROM product2;
++------+--------+-------+
+| p_id | name   | price |
++------+--------+-------+
+|    1 | pen    |    82 |
+|    2 | pencil |    71 |
+|    3 | soap   |    61 |
+|    4 | sketch |    82 |
+|    5 | book   |    82 |
++------+--------+-------+
+5 rows in set (0.01 sec)
+
+      mysql> create view dd as  select * from product2 where p_id not in (select p_id from invoice_item0);
+      Query OK, 0 rows affected (0.19 sec)
+
+      mysql> select *from dd;
+      +------+--------+-------+
+      | p_id | name   | price |
+      +------+--------+-------+
+      |    2 | pencil |    71 |
+      |    4 | sketch |    82 |
+      |    5 | book   |    82 |
+      +------+--------+-------+
+      3 rows in set (0.00 sec)
