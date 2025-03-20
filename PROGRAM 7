@@ -1,0 +1,16 @@
+OPTIMIZING DATABASE: (JOINS)
+
+1.List the product name and quantity of invoice items.
+
+    mysql> select name,quantity from product2 join invoice_item0 on product2.p_id=invoice_item0.p_id;
+    +------+----------+
+    | name | quantity |
+    +------+----------+
+    | soap |        7 |
+    | pen  |        7 |
+    | pen  |        3 |
+    | pen  |        3 |
+    | soap |        7 |
+    +------+----------+
+    5 rows in set (0.00 sec)
+
