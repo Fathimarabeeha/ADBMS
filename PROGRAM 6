@@ -75,3 +75,4 @@ mysql> select * FROM product2;
       |    5 | book   |    82 |
       +------+--------+-------+
       3 rows in set (0.00 sec)
+//VERIFIED
