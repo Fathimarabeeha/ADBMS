@@ -14,3 +14,45 @@ OPTIMIZING DATABASE: (JOINS)
     +------+----------+
     5 rows in set (0.00 sec)
 
+2.Display invoice details of the transaction dated ’2023-02-25’.
+
+   mysql> select * from invoice_master0 join invoice_item0 on invoice_master0.inv_id=invoice_item0.inv_id where inv_date='2023-02-25';
+   +--------+---------+------------+--------+------+----------+
+   | inv_id | cust_id | inv_date   | inv_id | p_id | quantity |
+   +--------+---------+------------+--------+------+----------+
+   |    101 |    NULL | 2023-02-25 |    101 |    1 |        7 |
+   |    102 |    NULL | 2023-02-25 |    102 |    1 |        3 |
+   |    102 |    NULL | 2023-02-25 |    102 |    1 |        3 |
+   +--------+---------+------------+--------+------+----------+
+   3 rows in set (0.01 sec)
+
+3.Display the customer name, product name, invoice date of purchased item ‘pen’.
+
+  mysql> SELECT customer0.name,product2.name,invoice_master0.inv_date FROM customer0 JOIN invoice_master0 ON customer0.cust_id = invoice_master0.cust_id JOIN invoice_item0 ON invoice_master0.inv_id = invoice_item0.inv_id JOIN product2 ON product2.p_id = invoice_item0.p_id WHERE product2.name = 'pen';
+  +------+------+------------+
+  | name | name | inv_date   |
+  +------+------+------------+
+  | Rifa | pen  | 2023-02-25 |
+  +------+------+------------+
+  1 row in set (0.00 sec)
+
+4.Display all customer details and invoice details must include customer has not purchased items.
+
+  mysql> select * from customer0 left join invoice_master0 on invoice_master0.cust_id=customer0.cust_id;
+  +---------+---------+---------+------+-----------+--------+---------+------------+
+  | cust_id | name    | address | city | ph_no     | inv_id | cust_id | inv_date   |
+  +---------+---------+---------+------+-----------+--------+---------+------------+
+  |   10002 | Rifa    | atholi  | ekm  | 546546511 |    101 |   10002 | 2023-02-25 |
+  |   10004 | Rifa    | atholi  | ekm  |      NULL |   NULL |    NULL | NULL       |
+  |   10006 | earson  | athani  | ekm  | 875454488 |   NULL |    NULL | NULL       |
+  |   10007 | fathima | athani  | ekm  | 875454488 |   NULL |    NULL | NULL       |
+  +---------+---------+---------+------+-----------+--------+---------+------------+
+  4 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
