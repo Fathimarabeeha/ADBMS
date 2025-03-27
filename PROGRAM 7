@@ -49,10 +49,51 @@ OPTIMIZING DATABASE: (JOINS)
   +---------+---------+---------+------+-----------+--------+---------+------------+
   4 rows in set (0.00 sec)
 
+ OPTIMIZING DATABASE: (Using Set, arithmetic, logical and special operators)
 
+1.Display customer_id, city  who lives either in ‘CLT’ or in ‘TVM’
 
+   mysql> select CUST_id,city from customer0 where city='tvm' or city='calicut';
+   +---------+---------+
+   | CUST_id | city    |
+   +---------+---------+
+   |   10004 | calicut |
+   |   10007 | tvm     |
+   +---------+---------+
+   2 rows in set (0.00 sec)
 
+2.Display product details with an updated price amount(new price= old price+5rs)
 
+   mysql>  select name, price, price+5 as updated_price from product2;
+   +--------+-------+---------------+
+   | name   | price | updated_price |
+   +--------+-------+---------------+
+   | pen    |    82 |            87 |
+   | pencil |    71 |            76 |
+   | soap   |    61 |            66 |
+   | sketch |    82 |            87 |
+   | book   |    82 |            87 |
+   +--------+-------+---------------+
+   5 rows in set (0.03 sec)
 
+3.Display customer details who doesn’t have phone number and lives in ‘Calicut’ city (use logical operators)
 
+   mysql> select * from customer0 where ph_no is null and city='calicut';
+   +---------+------+---------+---------+-------+
+   | cust_id | name | address | city    | ph_no |
+   +---------+------+---------+---------+-------+
+   |   10004 | Rifa | atholi  | calicut |  NULL |
+   +---------+------+---------+---------+-------+
+   1 row in set (0.00 sec)
+
+4.List the product names if it finds any records in the invoice items table has quantity =3 (use special operators)
+
+   mysql> select name from product2 where exists (select 1 from invoice_item0 where
+   invoice_item0.p_id = product2.p_id and quantity=3);
+   +------+
+   | name |
+   +------+
+   | pen  |
+   +------+
+   1 row in set (0.00 sec)
 
