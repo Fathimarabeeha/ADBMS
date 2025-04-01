@@ -1,0 +1,90 @@
+1. Create a database named CompanyDB
+
+
+
+
+2.Create two tables:
+    Employees (EmpID, Name, Department, Salary )
+    Departments (DeptID, DeptName, Location)
+
+
+3. Insert at least  5 records into the  table employees and  3 records into the department table.
+
+
+4. Write SQL queries to:
+
+a) Select employees whose names start with ‘A’ using LIKE.
+
+mysql> select * FROM Employees where Name like 'a%';
++-------+--------+------------+--------+
+| EmpID | Name   | Department | salary |
++-------+--------+------------+--------+
+|     1 | amina  | manager    |  50000 |
+|     4 | ayisha | HR manager |  55000 |
++-------+--------+------------+--------+
+2 rows in set (0.00 sec)
+
+b) Display the total number of employees in each department using GROUP BY.
+
+mysql> SELECT Department, count(*) as total_Employees from Employees GROUP BY Department;
++-------------+-----------------+
+| Department  | total_Employees |
++-------------+-----------------+
+| manager     |               1 |
+| Ast.manager |               1 |
+| CEO         |               1 |
+| HR manager  |               1 |
+| finance     |               1 |
++-------------+-----------------+
+5 rows in set (0.00 sec)
+
+
+c) Retrieve all employee details sorted by salary in descending order using ORDER BY.
+mysql>  select * from Employees order by salary desc;
++-------+----------+-------------+--------+
+| EmpID | Name     | Department  | salary |
++-------+----------+-------------+--------+
+|     3 | kadheeja | CEO         | 100000 |
+|     5 | richu    | finance     |  60000 |
+|     4 | ayisha   | HR manager  |  55000 |
+|     1 | amina    | manager     |  50000 |
+|     2 | fathima  | Ast.manager |  40000 |
++-------+----------+-------------+--------+
+5 rows in set (0.00 sec)
+
+
+d) Fetch employee names, their departments, and department locations using JOIN.
+
+mysql> select Employees.Name,Employees.Department,Departments.Location FROM Employees join Departments on Employees.EmpID= Departments.DeptID;
++----------+-------------+----------+
+| Name     | Department  | Location |
++----------+-------------+----------+
+| amina    | manager     | canada   |
+| fathima  | Ast.manager | kalkatta |
+| kadheeja | CEO         | new york |
++----------+-------------+----------+
+3 rows in set (0.00 sec)
+
+e) Find employees earning more than the average salary using a SUBQUERY.
+
+mysql>  select * from Employees where salary > (select avg(salary)from Employees);
++-------+----------+------------+--------+
+| EmpID | Name     | Department | salary |
++-------+----------+------------+--------+
+|     3 | kadheeja | CEO        | 100000 |
++-------+----------+------------+--------+
+1 row in set (0.00 sec)
+
+f) Create a VIEW to display employees earning more than 55,000.
+
+mysql> create view high_salry_Employees as select * from Employees where salary>55000;
+ Query OK, 0 rows affected (0.21 sec)
+
+mysql> select*from high_salry_Employees;
++-------+----------+------------+--------+
+| EmpID | Name     | Department | salary |
++-------+----------+------------+--------+
+|     3 | kadheeja | CEO        | 100000 |
+|     5 | richu    | finance    |  60000 |
++-------+----------+------------+--------+
+2 rows in set (0.00 sec)
