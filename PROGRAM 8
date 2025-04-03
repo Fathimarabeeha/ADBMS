@@ -1,0 +1,76 @@
+PL/SQL PROGRAMS- STORED PROCEDURES
+
+1.Create a procedure to display all tables in the invoice database.
+
+  mysql> delimiter $$
+  mysql>  create procedure AA()
+    -> begin
+    -> select * from customer0;
+    -> select * from product2;
+    -> select * from invoice_master0;
+    -> select * from invoice_item0;
+    -> end
+    -> $$
+    Query OK, 0 rows affected (0.20 sec)
+
+   mysql> call AA() $$
+  +---------+---------+---------+---------+-----------+
+  | cust_id | name    | address | city    | ph_no     |
+  +---------+---------+---------+---------+-----------+mysql> 
+
+  |   10002 | Rifa    | atholi  | ekm     | 546546511 |
+  |   10004 | Rifa    | atholi  | calicut |      NULL |
+  |   10006 | earson  | athani  | ekm     | 875454488 |
+  |   10007 | fathima | athani  | tvm     | 875454488 |
+  +---------+---------+---------+---------+-----------+
+  4 rows in set (0.02 sec)
+ 
+  +------+--------+-------+
+  | p_id | name   | price |
+  +------+--------+-------+
+  |    1 | pen    |    82 |
+  |    2 | pencil |    71 |
+  |    3 | soap   |    61 |
+  |    4 | sketch |    82 |
+  |    5 | book   |    82 |
+  +------+--------+-------+
+  5 rows in set (0.11 sec)
+
+  +--------+---------+------------+
+  | inv_id | cust_id | inv_date   |
+  +--------+---------+------------+
+  |    101 |   10002 | 2023-02-25 |
+  |    102 |    NULL | 2023-02-25 |
+  |    103 |    NULL | 2023-05-21 |
+  |    104 |    NULL | 2023-07-26 |
+  +--------+---------+------------+
+  4 rows in set (0.14 sec)
+
+  +--------+------+----------+
+  | inv_id | p_id | quantity |
+  +--------+------+----------+
+  |    103 |    3 |        7 |
+  |    101 |    1 |        7 |
+  |    102 |    1 |        3 |
+  |    102 |    1 |        3 |
+  |    103 |    3 |        7 |
+  +--------+------+----------+
+  5 rows in set (0.14 sec)
+
+  Query OK, 0 rows affected (0.14 sec)
+
+
+2.Create a procedure to find greatest of 2 numbers.
+
+mysql> DELIMITER $$
+mysql> CREATE PROCEDURE FindGreatest(num1 INT, num2 INT)
+    -> BEGIN
+    -> IF num1 > num2 THEN
+    -> SELECT num1 AS Greatest;
+    -> ELSE
+    -> SELECT num2 AS Greatest;
+    -> END IF;
+    -> END $$
+Query OK, 0 rows affected (0.16 sec)
+
+3.Create a procedure to display invoice details of a particular customer.
