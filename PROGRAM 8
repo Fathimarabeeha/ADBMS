@@ -16,8 +16,7 @@ PL/SQL PROGRAMS- STORED PROCEDURES
    mysql> call AA() $$
   +---------+---------+---------+---------+-----------+
   | cust_id | name    | address | city    | ph_no     |
-  +---------+---------+---------+---------+-----------+mysql> 
-
+  +---------+---------+---------+---------+-----------+
   |   10002 | Rifa    | atholi  | ekm     | 546546511 |
   |   10004 | Rifa    | atholi  | calicut |      NULL |
   |   10006 | earson  | athani  | ekm     | 875454488 |
@@ -64,7 +63,7 @@ PL/SQL PROGRAMS- STORED PROCEDURES
 
 mysql> DELIMITER $$
 mysql> CREATE PROCEDURE FindGreatest(num1 INT, num2 INT)
-    -> BEGIN
+    -> BEGINUSE
     -> IF num1 > num2 THEN
     -> SELECT num1 AS Greatest;
     -> ELSE
@@ -73,4 +72,45 @@ mysql> CREATE PROCEDURE FindGreatest(num1 INT, num2 INT)
     -> END $$
 Query OK, 0 rows affected (0.16 sec)
 
+mysql> call FindGreatest(10,50);
++----------+
+| Greatest |
++----------+
+|       50 |
++----------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
 3.Create a procedure to display invoice details of a particular customer.
+
+mysql> DELIMITER $$
+
+mysql> CREATE PROCEDURE GetInvoiceDetailsByCustomer(IN customer_id INT)
+    -> BEGIN
+    ->     SELECT
+    ->         im.inv_id,
+    ->         im.inv_date,
+    ->         ii.p_id,
+    ->         p.name AS product_name,
+    ->         ii.quantity,
+    ->         p.price,
+    ->         (ii.quantity * p.price) AS total_price
+    ->     FROM invoice_master0 im
+    ->     JOIN invoice_item0 ii ON im.inv_id = ii.inv_id
+    ->     JOIN product2 p ON ii.p_id = p.p_id
+    ->     WHERE im.cust_id = customer_id;
+    -> END $$
+Query OK, 0 rows affected (0.20 sec)
+
+mysql> DELIMITER ;
+mysql> CALL GetInvoiceDetailsByCustomer(10002);
++--------+------------+------+--------------+----------+-------+-------------+
+| inv_id | inv_date   | p_id | product_name | quantity | price | total_price |
++--------+------------+------+--------------+----------+-------+-------------+
+|    101 | 2023-02-25 |    1 | pen          |        7 |    82 |         574 |
++--------+------------+------+--------------+----------+-------+-------------+
+1 row in set (0.01 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
