@@ -7,6 +7,13 @@
     Employees (EmpID, Name, Department, Salary )
     Departments (DeptID, DeptName, Location)
 
+mysql> create table Employees (EmpID int primary key, Name varchar(10), Departme
+nt varchar(10), Salary int )
+Query OK, 0 rows affected (0.02 sec)
+
+
+mysql> create table Departments (DeptID int, DeptName varchar(10), Location varchar(10));
+Query OK, 0 rows affected (0.02 sec)
 
 3. Insert at least  5 records into the  table employees and  3 records into the department table.
 
