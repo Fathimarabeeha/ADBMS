@@ -1,0 +1,33 @@
+1. Create a trigger to handle updates to the customer table.
+
+ mysql> desc customer0;123 Main St
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| cust_id | int          | NO   | PRI | NULL    |       |
+| name    | varchar(20)  | YES  |     | NULL    |       |
+| address | varchar(100) | YES  |     | NULL    |       |
+| city    | char(20)     | YES  |     | NULL    |       |
+| ph_no   | int          | YES  |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+123 Main St
+5 rows in set (0.00 sec)
+
+mysql> CREATE TABLE customer2 AS SELECT * FROM customer0;
+Query OK, 4 rows affected (1.15 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> desc customer2;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| cust_id | int          | NO   |     | NULL    |       |
+| name    | varchar(20)  | YES  |     | NULL    |       |
+| address | varchar(100) | YES  |     | NULL    |       |
+| city    | char(20)     | YES  |     | NULL    |       |
+| ph_no   | int          | YES  |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+
+
+
