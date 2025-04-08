@@ -1,8 +1,5 @@
 1. Create a database named CompanyDB
 
-
-
-
 2.Create two tables:
     Employees (EmpID, Name, Department, Salary )
     Departments (DeptID, DeptName, Location)
