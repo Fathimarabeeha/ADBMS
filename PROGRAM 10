@@ -1,6 +1,6 @@
 1. Create a trigger to handle updates to the customer table.
 
- mysql> desc customer0;123 Main St
+ mysql> desc customer0;
 +---------+--------------+------+-----+---------+-------+
 | Field   | Type         | Null | Key | Default | Extra |
 +---------+--------------+------+-----+---------+-------+
@@ -9,7 +9,7 @@
 | address | varchar(100) | YES  |     | NULL    |       |
 | city    | char(20)     | YES  |     | NULL    |       |
 | ph_no   | int          | YES  |     | NULL    |       |
-+---------+--------------+------+-----+---------+-------+123 Main St
++---------+--------------+------+-----+---------+-------+
 5 rows in set (0.00 sec)
 
 mysql> CREATE TABLE customer2 AS SELECT * FROM customer0;
@@ -28,6 +28,98 @@ mysql> desc customer2;
 +---------+--------------+------+-----+---------+-------+
 5 rows in set (0.00 sec)
 
+mysql> select * from customer0 $
++---------+---------+---------+---------+-----------+
+| cust_id | name    | address | city    | ph_no     |
++---------+---------+---------+---------+-----------+
+|   10002 | Rifa    | atholi  | ekm     | 546546511 |
+|   10004 | Rifa    | atholi  | calicut |      NULL |
+|   10006 | earson  | athani  | ekm     | 875454488 |
+|   10007 | fathima | athani  | tvm     | 875454488 |
++---------+---------+---------+---------+-----------+
+4 rows in set (0.00 sec)
+
+Database changed
+mysql> delimiter $
+mysql> create trigger c_upd
+    -> after update on customer0
+    -> for each row begin
+    -> insert into customer2 set cust_id=old.cust_id,name=old.name,city=old.city,ph_no=old.ph_no;
+    -> end $
+Query OK, 0 rows affected (0.15 sec)
+
+
+
+mysql> update customer0 set city='clt' where cust_id=10002 $
+Query OK, 1 row affected (0.12 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from customer0;
++---------+---------+---------+---------+-----------+
+| cust_id | name    | address | city    | ph_no     |
++---------+---------+---------+---------+-----------+
+|   10002 | Rifa    | atholi  | clt     | 546546511 |
+|   10004 | Rifa    | atholi  | calicut |      NULL |
+|   10006 | earson  | athani  | ekm     | 875454488 |
+|   10007 | fathima | athani  | clt     | 875454488 |
++---------+---------+---------+---------+-----------+
+4 rows in set (0.00 sec)
+
+
+
+mysql> select * from customer2;
++---------+---------+---------+---------+-----------+
+| cust_id | name    | address | city    | ph_no     |
++---------+---------+---------+---------+-----------+
+|   10002 | Rifa    | atholi  | ekm     | 546546511 |
+|   10004 | Rifa    | atholi  | calicut |      NULL |
+|   10006 | earson  | athani  | ekm     | 875454488 |
+|   10007 | fathima | athani  | tvm     | 875454488 |
+|   10002 | Rifa    | NULL    | clt     | 546546511 |
+|   10007 | fathima | NULL    | clt     | 875454488 |
+|   10007 | fathima | NULL    | tvm     | 875454488 |
++---------+---------+---------+---------+-----------+
+7 rows in set (0.00 sec)
+
+
+2.Create a trigger to handle inserts to the product relation ( if price < 5 the set price to 10).
+
+  mysql> SELECT * FROM product2;
+  +------+--------+-------+
+  | p_id | name   | price |
+  +------+--------+-------+
+  |    1 | pen    |    82 |
+  |    2 | pencil |    71 |
+  |    3 | soap   |    61 |
+  |    4 | sketch |    82 |
+  |    5 | book   |    82 |
+  +------+--------+-------+
+5 rows in set (0.02 sec)
+
+mysql> delimiter $
+mysql> create trigger p_inst 
+    -> before insert on product2 
+    -> for each row  begin
+    -> if new.price <5 then
+    -> set new.price = 10;
+    -> end if;
+    -> end $
+Query OK, 0 rows affected (0.19 sec)
+
+   mysql> insert into product2 VALUES (5, 'marker', 3) $
+   Query OK, 1 row affected (0.09 sec)
+
+   mysql> select * from product2 $
+   +------+--------+-------+
+   | p_id | name   | price |
+   +------+--------+-------+
+   |    1 | pen    |    82 |
+   |    2 | pencil |    71 |
+   |    3 | soap   |    61 |
+   |    4 | sketch |    82 |
+   |    5 | marker |    10 |
+   +------+--------+-------+
+   5 rows in set (0.00 sec)
 
 
 
