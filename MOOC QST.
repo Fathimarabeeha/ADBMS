@@ -92,3 +92,4 @@ mysql> select*from high_salry_Employees;
 |     5 | richu    | finance    |  60000 |
 +-------+----------+------------+--------+
 2 rows in set (0.00 sec)
+//VERIFIED
