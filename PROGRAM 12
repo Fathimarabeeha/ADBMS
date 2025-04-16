@@ -1,0 +1,53 @@
+1.Write a MongoDB query to create an INVOICE database and collections (CUSTOMER, PRODUCT) and its corresponding documents
+
+test> use INVOICE;
+switched to db INVOICE
+
+Invoice> db.CUSTOMER.insertMany([
+...   {
+...     name: "Alice Johnson",
+...     email: "alice@example.com",
+...     phone: "123-456-7890",
+...     address: "123 Maple Street, Springfield"
+...   },
+...   {
+...     name: "Bob Smith",
+...     email: "bob@example.com",
+...     phone: "987-654-3210",
+...     address: "456 Oak Avenue, Riverdale"
+...   }
+... ]);
+... 
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('67ff800b207c20366fd861e0'),
+    '1': ObjectId('67ff800b207c20366fd861e1')
+  }
+}
+
+Invoice> db.PRODUCT.insertMany([
+...   {
+...     _id: 101,
+...     name: "Laptop",
+...     category: "Electronics",
+...     price: 1200,
+...     stock: 25
+...   },
+...   {
+...     _id: 102,
+...     name: "Desk Chair",
+...     category: "Furniture",
+...     price: 150,
+...     stock: 40
+...   }
+... ]);
+... 
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('67ff836f207c20366fd861e2'),
+    '1': ObjectId('67ff836f207c20366fd861e3')
+  }
+}
+
