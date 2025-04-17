@@ -1,53 +1,82 @@
 1.Write a MongoDB query to create an INVOICE database and collections (CUSTOMER, PRODUCT) and its corresponding documents
 
-test> use INVOICE;
-switched to db INVOICE
-
-Invoice> db.CUSTOMER.insertMany([
-...   {
-...     name: "Alice Johnson",
-...     email: "alice@example.com",
-...     phone: "123-456-7890",
-...     address: "123 Maple Street, Springfield"
-...   },
-...   {
-...     name: "Bob Smith",
-...     email: "bob@example.com",
-...     phone: "987-654-3210",
-...     address: "456 Oak Avenue, Riverdale"
-...   }
-... ]);
-... 
+INVOICE> db.customer.insertOne({
+... customer_id:"101",
+... name:"Bob",
+... address: { street: "1 main st", city: "CLT", zip: "123456" },
+... phone:"123456785"
+... })
 {
   acknowledged: true,
-  insertedIds: {
-    '0': ObjectId('67ff800b207c20366fd861e0'),
-    '1': ObjectId('67ff800b207c20366fd861e1')
-  }
+  insertedId: ObjectId('68013bcd7b98119ab6b5f89e')
 }
-
-Invoice> db.PRODUCT.insertMany([
-...   {
-...     _id: 101,
-...     name: "Laptop",
-...     category: "Electronics",
-...     price: 1200,
-...     stock: 25
-...   },
-...   {
-...     _id: 102,
-...     name: "Desk Chair",
-...     category: "Furniture",
-...     price: 150,
-...     stock: 40
-...   }
-... ]);
-... 
+INVOICE> db.customer.insertOne({
+... customer_id:"102",
+... name:"Alice",
+... address:{street:"2 main st",city:"TVM",zip:"456123"},
+... phone:"123457813"
+... })
 {
   acknowledged: true,
-  insertedIds: {
-    '0': ObjectId('67ff836f207c20366fd861e2'),
-    '1': ObjectId('67ff836f207c20366fd861e3')
-  }
+  insertedId: ObjectId('68013c707b98119ab6b5f89f')
+}
+INVOICE> db.product.insertOne({
+...
+...
+... p_id:"1",
+... name:"laptop",
+... price:"20000",
+... stock:"20"
+... })
+{
+  acknowledged: true,
+  insertedId: ObjectId('680137f37b98119ab6b5f89c')
+}
+INVOICE> db.product.insertOne({
+... p_id:"2",
+... name:"mouse",
+... price:"1000",
+... stock:"30"
+... })
+{
+  acknowledged: true,
+  insertedId: ObjectId('6801383b7b98119ab6b5f89d')
 }
 
+2.Write a MongoDB query to find all documents from the collection CUSTOMER.
+
+INVOICE> db.customer.find({})
+[
+  {
+    _id: ObjectId('68013bcd7b98119ab6b5f89e'),
+    customer_id: '101',
+    name: 'Bob',
+    address: { street: '1 main st', city: 'CLT', zip: '123456' },
+    phone: '123456785'
+  },
+  {
+    _id: ObjectId('68013c707b98119ab6b5f89f'),
+    customer_id: '102',
+    name: 'Alice',
+    address: { street: '2 main st', city: 'TVM', zip: '456123' },
+    phone: '123457813'
+  }
+]
+
+3.Write a MongoDB query to update the city in the collection CUSTOMER.
+INVOICE> db.customer.updateOne(
+... { name:"Bob"},
+... { $set:{"address.city":"New York"} }
+... )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+4.Write a MongoDB query to delete the first matched document whose city is “Clt”.
+
+INVOICE> db.customer.deleteOne({"address.city":"CLT"})
+{ acknowledged: true, deletedCount: 0 }
