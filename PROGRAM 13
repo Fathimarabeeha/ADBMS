@@ -1,0 +1,51 @@
+1.Write a MongoDB query to display the customer documents having city ‘ekm’,’tvm’.
+INVOICE> db.customer.find({"address.city":{$in:["TVM","New York"]}})
+[
+  {
+    _id: ObjectId('68013bcd7b98119ab6b5f89e'),
+    customer_id: '101',
+    name: 'Bob',
+    address: { street: '1 main st', city: 'New York', zip: '123456' },
+    phone: '123456785'
+  },
+  {
+    _id: ObjectId('68013c707b98119ab6b5f89f'),
+    customer_id: '102',
+    name: 'Alice',
+    address: { street: '2 main st', city: 'TVM', zip: '456123' },
+    phone: '123457813'
+  }
+]
+
+2.Write a MongoDB query to display all product documents their price >50.
+
+INVOICE> db.product.find({ price: { $gt: 50 } })
+[
+  {
+    _id: ObjectId('680137f37b98119ab6b5f89c'),
+    p_id: '1',
+    name: 'laptop',
+    price: 20000,
+    stock: 20
+  },
+  {
+    _id: ObjectId('6801383b7b98119ab6b5f89d'),
+    p_id: '2',
+    name: 'mouse',
+    price: 1000,
+    stock: 30
+  }
+]
+
+3.Write a MongoDB query to find customer documents who not live in ‘tvm’.
+
+INVOICE> db.customer.find({"address.city":{$ne:"TVM"}})
+[
+  {
+    _id: ObjectId('68013bcd7b98119ab6b5f89e'),
+    customer_id: '101',
+    name: 'Bob',
+    address: { street: '1 main st', city: 'New York', zip: '123456' },
+    phone: '123456785'
+  }
+]
