@@ -1,0 +1,15 @@
+ NoSQL - ADMINISTRATION & SHELL COMMANDS
+
+1.Write a MongoDB query to create a user “CUSTOMER1” and grant the read role in the INVOICE database.
+
+INVOICE> db.createUser({
+...   user: "CUSTOMER1",
+...   pwd: "asdf123!@#",  
+...   roles: [
+...     { role: "read", db: "INVOICE" }
+...   ]
+... })
+{ ok: 1 }
+
+2.Write a MongoDB query to create the backup for the INVOICE database.
+
