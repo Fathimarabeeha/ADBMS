@@ -80,3 +80,4 @@ INVOICE> db.customer.updateOne(
 
 INVOICE> db.customer.deleteOne({"address.city":"CLT"})
 { acknowledged: true, deletedCount: 0 }
+//VERIFIED
