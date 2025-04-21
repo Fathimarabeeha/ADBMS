@@ -49,3 +49,4 @@ INVOICE> db.customer.find({"address.city":{$ne:"TVM"}})
     phone: '123456785'
   }
 ]
+//VERIFIED
