@@ -13,3 +13,9 @@ INVOICE> db.createUser({
 
 2.Write a MongoDB query to create the backup for the INVOICE database.
 
+mongodump --db INVOICE --out /path/to/backup/directory
+
+3.Write a MongoDB query to restore a particular database or a collection.
+Invoice> db.dropDatabase()
+{ ok: 1, dropped: 'Invoice' }
+
