@@ -16,7 +16,18 @@ INVOICE> db.createUser({
 mongodump --db INVOICE --out /path/to/backup/directory
 
 3.Write a MongoDB query to restore a particular database or a collection.
-Invoice> db.dropDatabase()
-{ ok: 1, dropped: 'Invoice' }
+INVOICE> db.dropDatabase()
+{ ok: 1, dropped: 'INVOICE' }
+C:\>mongorestore --db INVOICE C:\Backups\invoice-backup\INVOICE
 
-//VERIFIED
+4.Write a MongoDB query to create an index for the collection customer using the field customer_name.
+
+test> use INVOICE
+switched to db INVOICE
+INVOICE> db.customer.createIndex({ customer_name: 1 })
+{
+        "createdCollectionAutomatically" : false,
+       	"numIndexesBefore" : 1, 
+       	"numIndexesAfter" : 2,
+       	"ok" : 1
+}
