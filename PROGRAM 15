@@ -19,3 +19,4 @@ mongodump --db INVOICE --out /path/to/backup/directory
 Invoice> db.dropDatabase()
 { ok: 1, dropped: 'Invoice' }
 
+//VERIFIED
