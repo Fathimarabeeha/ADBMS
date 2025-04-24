@@ -13,22 +13,38 @@ INVOICE> db.createUser({
 
 2.Write a MongoDB query to create the backup for the INVOICE database.
 
-mongodump --db INVOICE --out /path/to/backup/directory
+mongodump --db INVOICE --out ./invoice_backup_clean
+2025-04-24T15:26:12.541+0530	writing INVOICE.customer to invoice_backup_clean/INVOICE/customer.bson
+2025-04-24T15:26:12.541+0530	done dumping INVOICE.customer (1 document)
 
 3.Write a MongoDB query to restore a particular database or a collection.
+
+test> use INVOICE
+switched to db INVOICE
 INVOICE> db.dropDatabase()
 { ok: 1, dropped: 'INVOICE' }
-C:\>mongorestore --db INVOICE C:\Backups\invoice-backup\INVOICE
+INVOICE> 
+[3]+  Stopped                 mongosh
+(base) ksb@ksb-OptiPlex-3060:~$ mongorestore --db INVOICE --drop ./invoice_backup_clean/INVOICE
+2025-04-24T15:27:41.964+0530	The --db and --collection flags are deprecated for this use-case; please use --nsInclude instead, i.e. with --nsInclude=${DATABASE}.${COLLECTION}
+2025-04-24T15:27:41.964+0530	building a list of collections to restore from invoice_backup_clean/INVOICE dir
+2025-04-24T15:27:41.964+0530	don't know what to do with file "invoice_backup_clean/INVOICE/prelude.json", skipping...
+2025-04-24T15:27:41.964+0530	reading metadata for INVOICE.customer from invoice_backup_clean/INVOICE/customer.metadata.json
+2025-04-24T15:27:42.188+0530	restoring INVOICE.customer from invoice_backup_clean/INVOICE/customer.bson
+2025-04-24T15:27:42.219+0530	finished restoring INVOICE.customer (1 document, 0 failures)
+2025-04-24T15:27:42.219+0530	no indexes to restore for collection INVOICE.customer
+2025-04-24T15:27:42.219+0530	1 document(s) restored successfully. 0 document(s) failed to restore.
 
 4.Write a MongoDB query to create an index for the collection customer using the field customer_name.
 
 test> use INVOICE
 switched to db INVOICE
-INVOICE> db.customer.createIndex({ customer_name: 1 })
-{
-        "createdCollectionAutomatically" : false,
-       	"numIndexesBefore" : 1, 
-       	"numIndexesAfter" : 2,
-       	"ok" : 1
-}
-//RESUBMIT
+INVOICE> db.customer.createIndex({ customer_name:1 })
+customer_name_1
+INVOICE> db.customer.getIndexes()
+[
+  { v: 2, key: { _id: 1 }, name: '_id_' },
+  { v: 2, key: { customer_name: 1 }, name: 'customer_name_1' }
+]
+
+
