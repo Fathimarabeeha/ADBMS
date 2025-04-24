@@ -1,0 +1,169 @@
+(base) ksb@ksb-OptiPlex-3060:~$mkdir node1 node2 node3
+
+(base) ksb@ksb-OptiPlex-3060:~$ mongod --replSet rs0 --port 270rs0 [direct: secondary] db1> db.customer.find()
+[
+  {
+    _id: ObjectId('680768c5b702942e16d861e0'),
+    name: 'aj',
+    city: 'ekm',
+    age: 30
+  }
+]
+rs0 [direct: secondary] db1> 
+17 --dbpath ./node1 --bind_ip localhost
+(base) ksb@ksb-OptiPlex-3060:~$ mongod --replSet rs0 --port 27018 --dbpath ./node2 --bind_ip localhost
+(base) ksb@ksb-OptiPlex-3060:~$mongod --replSet rs0 --port 27019 --dbpath ./node3 --bind_ip localhost
+
+(base) ksb@ksb-OptiPlex-3060:~$ mongosh --port 27017
+
+
+test> rs.initiate({
+...  _id: "rs0",
+...  members: [
+...   { _id: 0, host: "localhost:27017" },
+...   { _id: 1, host: "localhost:27018" },
+...   { _id: 2, host: "localhost:27019" }
+...  ]
+... })
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1745315858, i: 1 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1745315858, i: 1 })
+}
+
+rs0 [direct: primary] test> rs.status()
+{
+  set: 'rs0',
+  date: ISODate('2025-04-24T10:21:45.591Z'),
+  myState: 1,
+  term: Long('3'),
+  syncSourceHost: '',
+  syncSourceId: -1,
+  heartbeatIntervalMillis: Long('2000'),
+  majorityVoteCount: 2,
+  writeMajorityCount: 2,
+  votingMembersCount: 3,
+  writableVotingMembersCount: 3,
+  optimes: {
+    lastCommittedOpTime: { ts: Timestamp({ t: 1745490105, i: 1 }), t: Long('3') },
+    lastCommittedWallTime: ISODate('2025-04-24T10:21:45.203Z'),
+    readConcernMajorityOpTime: { ts: Timestamp({ t: 1745490105, i: 1 }), t: Long('3') },
+    appliedOpTime: { ts: Timestamp({ t: 1745490105, i: 1 }), t: Long('3') },
+    durableOpTime: { ts: Timestamp({ t: 1745490105, i: 1 }), t: Long('3') },
+    lastAppliedWallTime: ISODate('2025-04-24T10:21:45.203Z'),
+    lastDurableWallTime: ISODate('2025-04-24T10:21:45.203Z')
+  },
+  lastStableRecoveryTimestamp: Timestamp({ t: 1745490095, i: 1 }),
+  electionCandidateMetrics: {
+    lastElectionReason: 'electionTimeout',
+    lastElectionDate: ISODate('2025-04-24T10:17:25.139Z'),
+    electionTerm: Long('3'),
+    lastCommittedOpTimeAtElection: { ts: Timestamp({ t: 1745489803, i: 1 }), t: Long('2') },
+    lastSeenOpTimeAtElection: { ts: Timestamp({ t: 1745489813, i: 1 }), t: Long('2') },
+    numVotesNeeded: 2,
+    priorityAtElection: 1,
+    electionTimeoutMillis: Long('10000'),
+    numCatchUpOps: Long('0'),
+    newTermStartDate: ISODate('2025-04-24T10:17:25.190Z'),
+    wMajorityWriteAvailabilityDate: ISODate('2025-04-24T10:17:25.273Z')
+  },
+  members: [
+    {
+      _id: 0,
+      name: 'localhost:27017',
+      health: 1,
+      state: 1,
+      stateStr: 'PRIMARY',
+      uptime: 366,
+      optime: { ts: Timestamp({ t: 1745490105, i: 1 }), t: Long('3') },
+      optimeDate: ISODate('2025-04-24T10:21:45.000Z'),
+      lastAppliedWallTime: ISODate('2025-04-24T10:21:45.203Z'),
+      lastDurableWallTime: ISODate('2025-04-24T10:21:45.203Z'),
+      syncSourceHost: '',
+      syncSourceId: -1,
+      infoMessage: '',
+      electionTime: Timestamp({ t: 1745489845, i: 1 }),
+      electionDate: ISODate('2025-04-24T10:17:25.000Z'),
+      configVersion: 1,
+      configTerm: 3,
+      self: true,
+      lastHeartbeatMessage: ''
+    },
+    {
+      _id: 1,
+      name: 'localhost:27018',
+      health: 0,
+      state: 8,
+      stateStr: '(not reachable/healthy)',
+      uptime: 0,
+      optime: { ts: Timestamp({ t: 0, i: 0 }), t: Long('-1') },
+      optimeDurable: { ts: Timestamp({ t: 0, i: 0 }), t: Long('-1') },
+      optimeDate: ISODate('1970-01-01T00:00:00.000Z'),
+      optimeDurableDate: ISODate('1970-01-01T00:00:00.000Z'),
+      lastAppliedWallTime: ISODate('2025-04-24T10:16:43.170Z'),
+      lastDurableWallTime: ISODate('2025-04-24T10:16:43.170Z'),
+      lastHeartbeat: ISODate('2025-04-24T10:21:45.539Z'),
+      lastHeartbeatRecv: ISODate('2025-04-24T10:16:43.689Z'),
+      pingMs: Long('0'),
+      lastHeartbeatMessage: 'Error connecting to localhost:27018 (127.0.0.1:27018) :: caused by :: onInvoke :: caused by :: Connection refused',
+      syncSourceHost: '',
+      syncSourceId: -1,
+      infoMessage: '',
+      configVersion: 1,
+      configTerm: 2
+    },
+    {
+      _id: 2,
+      name: 'localhost:27019',
+      health: 1,
+      state: 2,
+      stateStr: 'SECONDARY',
+      uptime: 261,
+      optime: { ts: Timestamp({ t: 1745490105, i: 1 }), t: Long('3') },
+      optimeDurable: { ts: Timestamp({ t: 1745490105, i: 1 }), t: Long('3') },
+      optimeDate: ISODate('2025-04-24T10:21:45.000Z'),
+      optimeDurableDate: ISODate('2025-04-24T10:21:45.000Z'),
+      lastAppliedWallTime: ISODate('2025-04-24T10:21:45.203Z'),
+      lastDurableWallTime: ISODate('2025-04-24T10:21:45.203Z'),
+      lastHeartbeat: ISODate('2025-04-24T10:21:45.376Z'),
+      lastHeartbeatRecv: ISODate('2025-04-24T10:21:45.375Z'),
+      pingMs: Long('0'),
+      lastHeartbeatMessage: '',
+      syncSourceHost: 'localhost:27017',
+      syncSourceId: 0,
+      infoMessage: '',
+      configVersion: 1,
+      configTerm: 3
+    }
+  ],
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1745490105, i: 1 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1745490105, i: 1 })
+}
+
+
+
+rs0 [direct: primary] test> use db1
+switched to db db1
+rs0 [direct: secondary] db1> db.customer.find()
+[
+  {
+    _id: ObjectId('680768c5b702942e16d861e0'),
+    name: 'Alice',
+    city: 'clt',
+    age: 30
+  }
+]
+rs0 [direct: secondary] db1> 
